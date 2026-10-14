@@ -1,152 +1,143 @@
-# Course Catalog API — Lab 4
+# Course Catalog API — Labs 4–5
 
-## 1. Что это
+Backend каталога курсов на FastAPI и Pydantic: список, фильтры, сортировка, пагинация, лайки и запись на курс.
 
-Самостоятельный backend каталога курсов на FastAPI с Pydantic-моделью, фильтрацией, сортировкой и пагинацией через `Depends`.
+## Запуск
 
-Данные шести курсов перенесены из `course-catalog/lib/courses.ts` первой лабораторной. Сохранены исходные названия, описания, кредиты и лайки. Python-поле `is_elective` соответствует TypeScript-полю `isElective`; в JSON используется `is_elective`.
+Нужен Python 3.10+. Проверено с Python 3.14.2, FastAPI 0.142.2 и Pydantic 2.13.5. Для `validate_by_name` требуется Pydantic >= 2.11, ограничение записано в requirements.txt.
 
-```text
-course-catalog-api/
-├── .venv/             # локальное окружение, исключено из Git
-├── .gitignore
-├── README.md
-├── requirements.txt
-├── models.py          # Pydantic-модель Course
-├── data.py            # шесть курсов и функции доступа
-└── main.py            # приложение, маршруты, dependency пагинации
-```
-
-| Метод | Путь | Назначение |
-| --- | --- | --- |
-| GET | `/` | Проверка работы сервера |
-| GET | `/courses` | Список курсов с параметрами |
-| GET | `/courses/{course_id}` | Один курс или ошибка 404 |
-
-Документация доступна на `/docs` (Swagger UI), `/redoc` и `/openapi.json`. В OpenAPI ровно три прикладных маршрута.
-
-Как работает код:
-
-- `Course(BaseModel)` проверяет поля во время выполнения. Обязательны `id`, `title`, `description`, `credits`; по умолчанию `is_elective=False`, `likes=0`.
-- `get_all_courses()` возвращает копию списка; `find_course()` возвращает курс или `None`.
-- `response_model` описывает и проверяет форму ответа, а также добавляет схему в документацию.
-- Проверка `is_elective is not None` позволяет корректно обрабатывать и `true`, и `false`.
-- Сначала выполняются фильтрация и поиск, затем сортировка, затем срез страницы.
-- `pagination()` вычисляет `offset = (page - 1) * page_size` и `limit`. FastAPI передаёт результат в маршрут через `Depends(pagination)`.
-- Для неизвестного ID выбрасывается `HTTPException(status_code=404, detail="Course not found")`.
-
-Реализованы бонусы 1–3: `Literal["popular", "title"]`, ограничения пагинации через `Query` и поиск `q` по названию без учёта регистра. Необязательный `/stats` не добавлен: сохранены три маршрута из основного acceptance checklist.
-
-Справка: [зависимости FastAPI](https://fastapi.tiangolo.com/tutorial/dependencies/).
-
-## 2. Как запустить
-
-Требования: Python 3.10+ и Git. Проверено на Windows с Python 3.14.2, FastAPI 0.142.2 и Pydantic 2.13.5.
-
-Откройте терминал в папке `course-catalog-api`. При первом запуске создайте окружение и установите зависимости.
-
-Windows PowerShell:
+В PowerShell из папки `course-catalog-api`:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-fastapi dev main.py
-```
-
-Если окружение уже создано и зависимости установлены, достаточно активации и команды `fastapi dev main.py`.
-
-Если PowerShell запрещает выполнение `Activate.ps1`, можно запускать через полные пути без изменения политики:
-
-```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\fastapi.exe dev main.py
 ```
 
-macOS / Linux:
+При повторном запуске достаточно последней команды. Можно активировать окружение через `.\.venv\Scripts\Activate.ps1` и использовать короткую команду `fastapi dev main.py`. На macOS/Linux: `python3 -m venv .venv`, `source .venv/bin/activate`, `pip install -r requirements.txt`, `fastapi dev main.py`.
 
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-fastapi dev main.py
+Swagger: <http://localhost:8000/docs>. Также доступны `/redoc` и `/openapi.json`. Запускайте backend первым, затем Next.js на **http://localhost:3000**. Список и страницы курсов получают данные через сервер Next.js; фильтр, лайки и форма — напрямую из браузера.
+
+## Структура
+
+- `models.py`: `CamelModel`, `Course`, `EnrollmentIn`, `Enrollment`.
+- `data.py`: шесть исходных курсов, `get_all_courses()` и `find_course()`; данные из Lab 1 сохранены.
+- `main.py`: приложение, CORS, dependency `pagination`, шесть операций API.
+- `requirements.txt`: зависимости; `.gitignore` исключает `.venv`, кэш и логи.
+
+## What changed — Lab 5
+
+### CORS
+
+Добавлен `CORSMiddleware` с `allow_origins=["http://localhost:3000"]`, `allow_methods=["*"]`, `allow_headers=["*"]`. Разрешён ровно origin frontend: схема, хост и порт, без пути и завершающего `/`. Он нужен для чтения ответов JavaScript-кодом браузера. Серверные запросы Next.js не зависят от CORS.
+
+CORS не является авторизацией: простой запрос от чужого origin может выполниться на сервере, но браузер не разрешит JavaScript прочитать ответ. Если нужен preflight, браузер сначала проверяет разрешение через OPTIONS и при отказе не отправляет основной запрос.
+
+### camelCase JSON
+
+`Course` и `EnrollmentIn` наследуются от `CamelModel`, `Enrollment` — от `EnrollmentIn`. Настройки: `alias_generator=to_camel`, `validate_by_name=True`, `validate_by_alias=True`. В Python используется `is_elective`, а в JSON — `isElective`. При создании объектов допускаются и Python-имена, и aliases. Поля записи в JSON: `courseId`, `studentName`, `id`.
+
+Query-параметры сохраняют свои имена: `/courses?is_elective=true` возвращает два курса. `/courses?isElective=true` возвращает все шесть, потому что неизвестный query-параметр игнорируется. Эксперимент без `validate_by_name=True` выполнен: выборные курсы исчезают без ошибки; после восстановления настройки снова возвращаются два.
+
+### Три новые операции
+
+| Метод и путь | Назначение | Успешный статус |
+| --- | --- | --- |
+| `GET /` | Проверка сервера | 200 |
+| `GET /courses` | Список, фильтрация, сортировка, пагинация | 200 |
+| `GET /courses/{course_id}` | Один курс | 200 |
+| `POST /courses/{course_id}/like` | Увеличить лайки и вернуть курс | 200 |
+| `POST /enrollments` | Создать запись на курс | 201 |
+| `GET /enrollments` | Посмотреть записи | 200 |
+
+`POST /courses/web-security/like` после перезапуска возвращает:
+
+```json
+{
+  "id": "web-security",
+  "title": "Web Security Essentials",
+  "description": "JWT/OAuth2, defending against XSS, CSRF, SQL injection.",
+  "credits": 4,
+  "isElective": false,
+  "likes": 22
+}
 ```
 
-Откройте <http://127.0.0.1:8000/docs>. Оставьте терминал с сервером открытым. Изменения Python-файлов подхватываются автоматически. Остановка сервера в терминале: `Ctrl+C`. Если порт занят, используйте `fastapi dev main.py --port 8001` и адрес с портом `8001`.
+`POST /enrollments`, тело запроса:
 
-Параметры `GET /courses`:
+```json
+{"courseId": "web-security", "studentName": "Aigerim"}
+```
 
-| Параметр | По умолчанию | Допустимые значения |
-| --- | --- | --- |
-| `is_elective` | не задан | `true` / `false`; без параметра — все курсы |
-| `sort` | `popular` | `popular` — лайки по убыванию; `title` — название по алфавиту |
-| `q` | не задан | Подстрока названия без учёта регистра |
-| `page` | `1` | Целое число ≥ 1 |
-| `page_size` | `20` | Целое число от 1 до 100 |
+Первый успешный ответ, статус 201:
 
-Для сдачи создайте на GitHub пустой репозиторий `course-catalog-api` без автоматически созданного README. Затем выполните, заменив `YOUR_USERNAME` своим логином:
+```json
+{"courseId": "web-security", "studentName": "Aigerim", "id": 1}
+```
+
+После него `GET /enrollments` возвращает:
+
+```json
+[{"courseId": "web-security", "studentName": "Aigerim", "id": 1}]
+```
+
+`EnrollmentIn.student_name` имеет `Field(min_length=2)`. Имя `A` получает 422 с `loc: ["body", "studentName"]` и сообщением `String should have at least 2 characters`. Неизвестный курс в записи или лайке получает 404 с `{"detail":"Course not found"}`.
+
+Лайки и записи находятся в памяти: переживают обновление страницы браузера, но сбрасываются при перезапуске процесса backend. Повторная запись создаёт новую запись; авторизация, база данных и защита от повторных лайков в этой лабораторной не предусмотрены.
+
+## What was verified
+
+Проверено 14 октября 2026 через HTTP и реальные действия в Microsoft Edge. Swagger содержит шесть операций (пять разных путей, потому что `/enrollments` поддерживает GET и POST).
+
+| Проверка | Результат |
+| --- | --- |
+| `GET /courses` | 6 курсов, `ai-integration` первый, `api-design` последний |
+| `is_elective=true` / `false` | 2 выборных / 4 обязательных |
+| `sort=title` | Названия по алфавиту |
+| `page=2&page_size=2` | `web-security`, `backend-fastapi` |
+| `page=4&page_size=2` | `[]` |
+| `q=react` / `q=API` | Один / два курса, поиск без учёта регистра |
+| `sort=banana`, `page=0`, `page_size=1000` | 422 — бонусная валидация Lab 4 сохранена |
+| GET и POST лайка для `nope` | 404, `Course not found` |
+| Два POST лайка `web-security` | 21 → 22 → 23; после обновления страницы остаётся 23 |
+| POST записи с `Aigerim` | 201, назначен ID, запись доступна через GET |
+| POST записи с `A` | 422, ошибка поля `studentName` |
+| POST записи для `nope` | 404 |
+| Origin `http://localhost:3000` | 200 и `access-control-allow-origin: http://localhost:3000` |
+| Origin `http://evil.example` | 200 без `access-control-allow-origin` |
+| OPTIONS записи | 200, разрешены POST и content-type, max-age 600 |
+| JSON и OpenAPI | camelCase: `isElective`, `courseId`, `studentName` |
+| `pip check` | Конфликтов зависимостей нет |
+
+Команды для проверки CORS в PowerShell:
+
+```powershell
+curl.exe -i -H "Origin: http://localhost:3000" http://localhost:8000/
+curl.exe -i -H "Origin: http://evil.example" http://localhost:8000/
+curl.exe -i -X OPTIONS http://localhost:8000/enrollments -H "Origin: http://localhost:3000" -H "Access-Control-Request-Method: POST" -H "Access-Control-Request-Headers: content-type"
+```
+
+Пять обязательных поломок CORS/Python воспроизведены и исправлены. Журнал фактических Console/Network-наблюдений находится в `course-catalog/README.md` (frontend).
+
+## Lab 4 — версия для отдельной защиты
+
+Исходная версия сохранена в ветке `lab4-defense` и локальной рабочей папке `../course-catalog-api-lab4`. Это состояние коммита `8301b33`: три GET-маршрута, `is_elective` в JSON, README и девять коммитов Lab 4. В сохранённой папке подготовлено собственное виртуальное окружение.
+
+```powershell
+cd ..\course-catalog-api-lab4
+.\.venv\Scripts\fastapi.exe dev main.py --port 8004
+```
+
+Откройте <http://localhost:8004/docs>. Отдельный порт позволяет показывать Lab 4 одновременно с Lab 5 на порту 8000. Копия проверена: три маршрута, snake_case и два выборных курса.
+
+## Сдача
+
+Для backend пока не настроен GitHub remote. Создайте пустой репозиторий `course-catalog-api`, затем замените YOUR_USERNAME в командах:
 
 ```bash
 git remote add origin https://github.com/YOUR_USERNAME/course-catalog-api.git
 git push -u origin main
+git push origin lab4-defense
 ```
 
-Репозиторий должен быть публичным либо доступным преподавателю. Отправьте ссылку через LMS или чат курса. Локальные коммиты уже созданы по этапам; `.venv`, кэш Python и логи исключены из Git. Публикация на GitHub не выполнена: удалённый репозиторий для этого проекта ещё не настроен.
-
-## 3. What was verified — что проверено
-
-Запросы ниже проверены на работающем сервере. В колонке результата списки обозначают ID курсов в порядке ответа; API возвращает полные объекты с шестью полями.
-
-| Запрос | HTTP | Фактический результат |
-| --- | --- | --- |
-| `/` | 200 | `{"message":"Course Catalog API is running"}` |
-| `/courses` | 200 | `ai-integration`, `modern-frontend`, `web-security`, `backend-fastapi`, `databases-postgresql`, `api-design` |
-| `/courses/web-security` | 200 | Один объект `web-security` |
-| `/courses/nope` | 404 | `{"detail":"Course not found"}` |
-| `/courses?is_elective=true` | 200 | `ai-integration`, `api-design` |
-| `/courses?is_elective=false` | 200 | `modern-frontend`, `web-security`, `backend-fastapi`, `databases-postgresql` |
-| `/courses?sort=title` | 200 | `ai-integration`, `api-design`, `backend-fastapi`, `modern-frontend`, `databases-postgresql`, `web-security` |
-| `/courses?page=1&page_size=2` | 200 | `ai-integration`, `modern-frontend` |
-| `/courses?page=2&page_size=2` | 200 | `web-security`, `backend-fastapi` |
-| `/courses?page=3&page_size=2` | 200 | `databases-postgresql`, `api-design` |
-| `/courses?page=4&page_size=2` | 200 | `[]` |
-| `/courses?is_elective=false&sort=title&page=2&page_size=2` | 200 | `databases-postgresql`, `web-security` |
-| `/courses?q=react` | 200 | `modern-frontend` |
-| `/courses?q=API` | 200 | `backend-fastapi`, `api-design` |
-| `/courses?q=not-a-course` | 200 | `[]` |
-| `/courses?q=API&is_elective=true&page_size=1` | 200 | `api-design` |
-| `/courses?sort=banana` | 422 | Ошибка допустимых значений сортировки |
-| `/courses?page=0` и `/courses?page=-1` | 422 | Страница должна быть ≥ 1 |
-| `/courses?page_size=0` и `/courses?page_size=1000` | 422 | Размер страницы должен быть от 1 до 100 |
-| `/courses?page=abc` | 422 | Ожидается целое число |
-| `/courses?is_elective=banana` | 422 | Ожидается логическое значение |
-| `/courses?page_size=100` | 200 | Все шесть курсов |
-| `/docs` и `/redoc` | 200 | Документация доступна и отображается в браузере |
-| `/openapi.json` | 200 | Три GET-маршрута, схема `Course`, параметры запросов |
-
-Swagger UI дополнительно проверен в браузере Microsoft Edge: через `Try it out` → `Execute` выполнены запрос списка с `page=2`, `page_size=2` и запрос курса `nope`. Подтверждены ответы 200 и 404, отображение `Request URL` и `Response body`, наличие выпадающих списков `is_elective` и `sort`. ReDoc также отобразил маршруты.
-
-Проверка модели из задания:
-
-```python
-from models import Course
-
-Course(id="x", title="t", description="d", credits="five")
-# ValidationError: Input should be a valid integer
-
-course = Course(id="x", title="t", description="d", credits="5")
-print(course.credits, course.is_elective, course.likes)
-# 5 False 0
-```
-
-Оба случая проверены. Дополнительно подтверждено: изменение копии списка не изменяет исходный список, запросы с сортировкой не меняют порядок в `COURSES`, `pip check` не обнаружил конфликтов зависимостей.
-
-Как повторить проверку перед защитой:
-
-1. Откройте `/docs` и убедитесь, что видны три GET-маршрута.
-2. Разверните `GET /courses`, нажмите `Try it out`, задайте параметры из таблицы и нажмите `Execute`.
-3. Сравните `Request URL`, код ответа и ID в `Response body` с таблицей.
-4. В `GET /courses/{course_id}` проверьте `web-security` и `nope`.
-5. В `Schemas` разверните `Course` и покажите типы и значения по умолчанию.
-6. Откройте `/redoc` и `/openapi.json`.
-7. Выполните `git log --oneline` и `git status --short`: история содержит больше четырёх осмысленных коммитов, рабочее дерево чистое.
+Последняя команда публикует сохранённую ветку для защиты Lab 4. В репозиторий не включаются `.venv`, кэш и логи. Для Lab 5 нужны ссылки на этот backend и существующий frontend `course-catalog`. Подробный сценарий защиты на русском и простом английском — `course-catalog/LAB5_DEFENSE.md`.
