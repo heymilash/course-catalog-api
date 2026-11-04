@@ -1,0 +1,98 @@
+[
+  {
+    "request": "GET /courses?is_elective=true",
+    "status": 200,
+    "ids": [
+      "ai-integration",
+      "api-design"
+    ]
+  },
+  {
+    "request": "GET /courses?is_elective=false",
+    "status": 200,
+    "ids": [
+      "modern-frontend",
+      "web-security",
+      "backend-fastapi",
+      "databases-postgresql"
+    ]
+  },
+  {
+    "request": "GET /courses?is_elective=false&page_size=3",
+    "status": 200,
+    "ids": [
+      "modern-frontend",
+      "web-security",
+      "backend-fastapi"
+    ]
+  },
+  {
+    "request": "GET /courses?is_elective=false&page_size=3&page=2",
+    "status": 200,
+    "ids": [
+      "databases-postgresql"
+    ]
+  },
+  {
+    "request": "GET /courses?page=4&page_size=2",
+    "status": 200,
+    "ids": []
+  },
+  {
+    "request": "GET /courses?level=beginner",
+    "status": 200,
+    "ids": [
+      "ai-integration",
+      "api-design"
+    ]
+  },
+  {
+    "request": "GET /courses?level=intermediate",
+    "status": 200,
+    "ids": [
+      "modern-frontend",
+      "web-security",
+      "backend-fastapi",
+      "databases-postgresql"
+    ]
+  },
+  {
+    "request": "GET /courses?level=advanced",
+    "status": 200,
+    "ids": []
+  },
+  {
+    "request": "GET /courses?level=beginner&is_elective=false",
+    "status": 200,
+    "ids": []
+  },
+  {
+    "request": "GET /courses?sort=title",
+    "status": 200,
+    "ids": [
+      "ai-integration",
+      "api-design",
+      "backend-fastapi",
+      "modern-frontend",
+      "databases-postgresql",
+      "web-security"
+    ]
+  },
+  {
+    "request": "GET /courses?q=API",
+    "status": 200,
+    "ids": [
+      "backend-fastapi",
+      "api-design"
+    ]
+  },
+  {
+    "request": "GET /courses?q=%",
+    "status": 200,
+    "ids": []
+  },
+  {
+    "checks": "8 API operations; 5 error cases; joins/stats; 12 concurrent likes; restart persistence; seed repeatability; migrations clean; Lab 6 still 6/3/6 without level",
+    "result": "PASS"
+  }
+]

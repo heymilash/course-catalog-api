@@ -1,0 +1,8 @@
+INFO:     Started server process [27904]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8007 (Press CTRL+C to quit)
+INFO:     127.0.0.1:52664 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52664 - "GET /courses/api-design HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52664 - "GET /enrollments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52664 - "POST /students HTTP/1.1" 409 Conflict
