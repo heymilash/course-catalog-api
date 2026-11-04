@@ -1,0 +1,10 @@
+$ C:\Program Files\PostgreSQL\17\bin\psql.exe -X -h localhost -p 5437 -U catalog_app -d course_catalog -v ON_ERROR_STOP=1 -f seed.sql
+BEGIN
+TRUNCATE TABLE
+INSERT 0 6
+INSERT 0 3
+INSERT 0 6
+COMMIT
+
+exit=0
+
