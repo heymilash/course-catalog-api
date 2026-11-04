@@ -1,0 +1,1 @@
+{'ai-integration': 3, 'modern-frontend': 2, 'api-design': 1, 'backend-fastapi': 1, 'databases-postgresql': 1, 'web-security': 1}
