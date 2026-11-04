@@ -1,0 +1,27 @@
+$ python.exe check_models.py
+courses: 6 rows
+students: 3 rows
+enrollments: 6 rows
+names only in models: none
+names only in database: none
+
+exit=0
+
+$ python.exe check_models.py
+courses: 6 rows
+students: 3 rows
+enrollments: 6 rows
+names only in models: ['enrollments_course_id_unique', 'students_email_unique']
+names only in database: ['enrollments_course_id_student_id_key', 'students_email_key']
+
+exit=1
+
+$ python.exe check_models.py
+courses: 6 rows
+students: 3 rows
+enrollments: 6 rows
+names only in models: none
+names only in database: none
+
+exit=0
+
