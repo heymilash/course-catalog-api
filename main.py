@@ -95,9 +95,8 @@ def create_enrollment(data: EnrollmentIn, db: SessionDep):
     return services.enroll(db, data.course_id, data.student_id)
 
 
-@app.get("/enrollments", response_model=list[EnrollmentDetail])
-def list_enrollments(db: SessionDep):
-    stmt = (
+def enrollment_details():
+    return (
         select(
             Enrollment.id,
             Enrollment.course_id,
@@ -110,7 +109,25 @@ def list_enrollments(db: SessionDep):
         .join(Enrollment.student)
         .order_by(Enrollment.id)
     )
-    return db.execute(stmt).all()
+
+
+@app.get("/enrollments", response_model=list[EnrollmentDetail])
+def list_enrollments(db: SessionDep):
+    return db.execute(enrollment_details()).all()
+
+
+@app.get("/students/{student_id}", response_model=StudentOut)
+def get_student(student_id: int, db: SessionDep):
+    student = db.get(Student, student_id)
+    if student is None:
+        raise services.ServiceError("STUDENT_NOT_FOUND", "Student not found")
+    return student
+
+
+@app.get("/students/{student_id}/enrollments", response_model=list[EnrollmentDetail])
+def list_student_enrollments(student_id: int, db: SessionDep):
+    statement = enrollment_details().where(Enrollment.student_id == student_id)
+    return db.execute(statement).all()
 
 
 @app.get("/stats/courses", response_model=list[CourseStats])
