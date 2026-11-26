@@ -1,0 +1,45 @@
+[
+  {
+    "path": "/students",
+    "status": 422,
+    "content_type": "application/problem+json",
+    "body": {
+      "type": "https://example.com/problems/validation-error",
+      "title": "Validation failed",
+      "status": 422,
+      "detail": "2 invalid value(s) in the request",
+      "instance": "/students",
+      "errors": [
+        {
+          "in": "body",
+          "field": "name",
+          "detail": "String should have at least 2 characters"
+        },
+        {
+          "in": "body",
+          "field": "email",
+          "detail": "value is not a valid email address: An email address must have an @-sign."
+        }
+      ]
+    }
+  },
+  {
+    "path": "/courses?page=0",
+    "status": 422,
+    "content_type": "application/problem+json",
+    "body": {
+      "type": "https://example.com/problems/validation-error",
+      "title": "Validation failed",
+      "status": 422,
+      "detail": "1 invalid value(s) in the request",
+      "instance": "/courses",
+      "errors": [
+        {
+          "in": "query",
+          "field": "page",
+          "detail": "Input should be greater than or equal to 1"
+        }
+      ]
+    }
+  }
+]

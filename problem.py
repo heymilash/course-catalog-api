@@ -2,6 +2,7 @@
 from http import HTTPStatus
 
 from fastapi import FastAPI, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
@@ -35,6 +36,18 @@ def problem(
 
 
 def install(app: FastAPI) -> None:
+    @app.exception_handler(RequestValidationError)
+    async def on_validation_error(request: Request, exc: RequestValidationError):
+        errors = [
+            {"in": error["loc"][0],
+             "field": ".".join(str(part) for part in error["loc"][1:]),
+             "detail": error["msg"]}
+            for error in exc.errors()
+        ]
+        return problem(request, 422, "Validation failed",
+                       f"{len(errors)} invalid value(s) in the request",
+                       type=BASE + "validation-error", errors=errors)
+
     @app.exception_handler(ServiceError)
     async def on_service_error(request: Request, exc: ServiceError):
         status, slug, title = PROBLEMS[exc.code]

@@ -94,7 +94,7 @@ titles, credits and levels for student 2. Both use `cache: "no-store"`.
 The REST page runs two independent requests in parallel, then three course
 requests; the GraphQL page makes one POST. Browser Network sees Next.js page/RSC
 requests; the server-to-API calls are in the API log, not browser Fetch/XHR.
-`npm run lint` and `npm run build` pass; both pages have the dynamic `ƒ` marker.
+`npm run lint` and `npm run build` pass; both pages have the dynamic `Ж’` marker.
 
 ### Prepared Windows workspace
 
@@ -324,3 +324,20 @@ insufficient because the API returned HTTP 200 with errors and data null.
 References: [Strawberry FastAPI integration](https://strawberry.rocks/docs/integrations/fastapi),
 [DataLoaders](https://strawberry.rocks/docs/guides/dataloaders),
 [Next.js fetch](https://nextjs.org/docs/app/api-reference/functions/fetch).
+
+
+## Bonus
+
+### 1. Validation errors as Problem Details
+
+Implemented after the core README commit. RequestValidationError supplies
+`exc.errors()`; the handler keeps only the location, field path and message.
+All REST validation errors now use application/problem+json, status 422,
+type `validation-error`, and an `errors` list with `in`, `field`, `detail`.
+`errors` is an RFC 9457 extension, not one of its standard members.
+With name N and email bad, both issues arrive together; no raw exception object
+is serialized. Query validation such as page=0 uses the same format.
+The core 422 JSON gap described above is therefore closed in the final version.
+try_errors.py still passes 5/5 and now checks validation-error for the fifth case.
+Proofs: [before](experiments/lab8/bonus-01-before.json),
+[after](experiments/lab8/bonus-01-after.json).

@@ -1,0 +1,32 @@
+{
+  "status": 422,
+  "content_type": "application/json",
+  "body": {
+    "detail": [
+      {
+        "type": "string_too_short",
+        "loc": [
+          "body",
+          "name"
+        ],
+        "msg": "String should have at least 2 characters",
+        "input": "N",
+        "ctx": {
+          "min_length": 2
+        }
+      },
+      {
+        "type": "value_error",
+        "loc": [
+          "body",
+          "email"
+        ],
+        "msg": "value is not a valid email address: An email address must have an @-sign.",
+        "input": "bad",
+        "ctx": {
+          "reason": "An email address must have an @-sign."
+        }
+      }
+    ]
+  }
+}
