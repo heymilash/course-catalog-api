@@ -3,6 +3,7 @@
 FastAPI, SQLAlchemy 2.1, PostgreSQL, Alembic and Strawberry GraphQL: REST and
 GraphQL are two entrances to the same database and application services.
 Advanced Web Technologies, Labs 4-8.
+The final version includes all nine core stages and all three optional bonuses.
 
 Backend: [course-catalog-api](https://github.com/heymilash/course-catalog-api).
 Frontend: [course-catalog](https://github.com/heymilash/course-catalog).
@@ -138,14 +139,16 @@ was unavailable because the Windows browser tool could not determine the URL.
 - `problem.py` translates service codes to RFC 9457 responses:
   `application/problem+json`, with type, title, status, detail and instance.
   Unknown routes and wrong methods use about:blank; the 405 Allow header survives.
-  In the core version, Pydantic validation remains FastAPI's JSON 422 response.
+  The core version kept FastAPI's JSON 422 response; bonus 1 converts validation
+  errors to Problem Details too in the final version.
 - `/graphql` has Course, Student and Enrollment types; courses, course,
   students, student and enrollments queries. Nested fields return only requested data.
   IDs serialize as strings; Python names are converted to camelCase.
   `course` and `student` can return null for missing objects.
 - `enroll(input: EnrollInput!)` and `likeCourse(id: ID!)` use the same services
   as REST. The like signature follows the detailed skeleton in step 4.
-  Expected failures are in payload.userErrors (code/message), with the object null.
+  Bonus 2 adds createStudent(input: CreateStudentInput!) with the same payload
+  convention. Expected failures are in payload.userErrors (code/message), with the object null.
   Unexpected failures and query mistakes are in top-level errors.
 - The SQL session and all four DataLoaders are created per request in Context.
   Batch functions group by key value and return one element per requested key,
@@ -341,3 +344,58 @@ The core 422 JSON gap described above is therefore closed in the final version.
 try_errors.py still passes 5/5 and now checks validation-error for the fifth case.
 Proofs: [before](experiments/lab8/bonus-01-before.json),
 [after](experiments/lab8/bonus-01-after.json).
+
+### 2. createStudent and the shared name rule
+
+Before the change, REST accepted two spaces as a student name (201): Pydantic's
+minimum length and the database CHECK both count the spaces. The shared service
+now rejects `len(name.strip()) < 2` with INVALID_NAME before any INSERT.
+REST translates that to 422, type invalid-name; GraphQL createStudent returns
+student null and userErrors INVALID_NAME. Names are checked, not silently trimmed.
+
+```graphql
+mutation CreateStudent($input: CreateStudentInput!) {
+  createStudent(input: $input) {
+    student { id name }
+    userErrors { code message }
+  }
+}
+```
+
+```json
+{"input":{"name":"Nurlan Abenov","email":"nurlan@example.com"}}
+```
+
+Executed the three prescribed cases: name N -> INVALID_NAME; existing email ->
+EMAIL_TAKEN; valid new student -> object and empty userErrors. The original 8/8
+GraphQL checks still passed. Temporarily removing INVALID_NAME from REST's PROBLEMS
+caused REST 500 / KeyError while GraphQL still returned the expected userError.
+The mapping was restored and seed data reloaded. When adding a service error,
+also add its REST status/type/title mapping; GraphQL's generic conversion already
+uses its code/message. Email format remains Pydantic validation on REST; this
+bonus adds the specified shared name rule and does not claim GraphQL email validation.
+Proofs: [before](experiments/lab8/bonus-02-before.json),
+[after and missing-map test](experiments/lab8/bonus-02-after.json).
+
+### 3. Four simultaneous slow requests
+
+A separate temporary application used SELECT pg_sleep(0.5), per-request sessions
+and an otherwise identical query in each variant. One warm-up per variant was
+excluded from the timed four-request batch. Actual local timings:
+
+| Four requests | Total seconds |
+|---|---:|
+| REST def route | 0.693 |
+| GraphQL synchronous resolver | 2.062 |
+| GraphQL async resolver + run_in_threadpool | 0.529 |
+
+FastAPI dispatches a def route to worker threads, so database waits overlap.
+Strawberry executes a synchronous resolver on its event-loop thread, so the four
+waits queue up. `return await run_in_threadpool(pause, info.context.db)` moves the
+blocking call off that thread. Our ordinary queries take milliseconds, but slow
+SQL, larger data or slow external calls would stall other requests.
+One SQLAlchemy Session must not be shared by concurrently executing fields;
+threadpool offloading with a shared session is not a general concurrency solution.
+The experimental server on 8009 was stopped and did not change the product API.
+The two temporary Python files remain outside the repositories as permitted
+by the task. [Actual results](experiments/lab8/bonus-03-blocking.json).

@@ -1,0 +1,9 @@
+ok   courses(limit: 2)           ai-integration,modern-frontend
+ok   course(id: "api-design")    API Design: REST vs GraphQL
+ok   course(id: "nope")          None
+ok   student(id: 2) -> courses   3
+ok   enroll twice                ALREADY_ENROLLED
+ok   enroll: unknown course      COURSE_NOT_FOUND
+ok   enroll: unknown student     STUDENT_NOT_FOUND
+ok   unknown field               Cannot query field 'titel' on type 'Course'
+8 of 8 as expected

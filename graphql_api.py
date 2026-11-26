@@ -170,8 +170,29 @@ def as_user_errors(error: services.ServiceError) -> list[UserError]:
     return [UserError(code=error.code, message=error.message)]
 
 
+@strawberry.input
+class CreateStudentInput:
+    name: str
+    email: str
+
+
+@strawberry.type
+class CreateStudentPayload:
+    student: StudentType | None = None
+    user_errors: list[UserError] = strawberry.field(default_factory=list)
+
+
 @strawberry.type
 class Mutation:
+    @strawberry.mutation
+    def create_student(self, info: Info, input: CreateStudentInput) -> CreateStudentPayload:
+        try:
+            student = services.create_student(info.context.db, input.name, input.email)
+        except services.ServiceError as error:
+            return CreateStudentPayload(user_errors=as_user_errors(error))
+        info.context.student.clear_all()
+        return CreateStudentPayload(student=student)
+
     @strawberry.mutation
     def enroll(self, info: Info, input: EnrollInput) -> EnrollPayload:
         try:
