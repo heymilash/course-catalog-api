@@ -1,3 +1,4 @@
+#metadata for alembic migrations
 from logging.config import fileConfig
 
 from sqlalchemy import create_engine

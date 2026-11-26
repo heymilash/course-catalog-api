@@ -1,3 +1,4 @@
+#describe data models for the course catalog API
 from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field

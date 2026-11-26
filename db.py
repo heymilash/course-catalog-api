@@ -1,3 +1,4 @@
+#create engine and session for the course catalog API
 from collections.abc import Iterator
 from datetime import datetime
 
