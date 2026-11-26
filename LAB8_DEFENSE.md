@@ -154,3 +154,28 @@ GraphQL 1/1/339/3 (запросы / раунды / байты / SQL). Байты
 6. Без защиты SQL и параметры утекали; после — безопасные сообщения и SQL 0 для flood.
 7. Introspection выключена, но подсказки с именами полей остаются.
 8. Ошибка GraphQL, отсутствие проверки errors и недоступный API дают разные сообщения.
+
+## Бонусы: выполнены все три
+
+1. **Валидация тоже Problem Details.** В problem.py обработчик
+   RequestValidationError возвращает 422 и список errors: где поле и что неверно.
+2. **createStudent.** Общая проверка имени в services.py запрещает короткое имя
+   после удаления пробелов по краям. REST отвечает 422 invalid-name,
+   GraphQL — userErrors INVALID_NAME. Код проверки написан один раз.
+3. **Блокирующий resolver.** Четыре запроса с pg_sleep(0.5): REST около 0.69 с,
+   GraphQL sync около 2.06 с, GraphQL с threadpool около 0.53 с.
+   «Синхронный resolver блокирует event loop, перенос вызова в поток позволяет ожиданиям идти параллельно».
+
+Бонусная мутация в GraphiQL:
+
+```graphql
+mutation {
+  createStudent(input: {name: "N", email: "n@example.com"}) {
+    student { id name }
+    userErrors { code message }
+  }
+}
+```
+
+Она не изменит данные: получишь INVALID_NAME. Успешный пример и результаты
+всех трёх бонусов находятся в README -> Bonus.

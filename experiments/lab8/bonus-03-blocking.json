@@ -1,0 +1,78 @@
+[
+  {
+    "method": "REST def",
+    "requests": 4,
+    "sleep_per_request": 0.5,
+    "seconds": 0.693,
+    "bodies": [
+      {
+        "v": 1
+      },
+      {
+        "v": 1
+      },
+      {
+        "v": 1
+      },
+      {
+        "v": 1
+      }
+    ]
+  },
+  {
+    "method": "GraphQL sync",
+    "requests": 4,
+    "sleep_per_request": 0.5,
+    "seconds": 2.062,
+    "bodies": [
+      {
+        "data": {
+          "slowSync": 1
+        }
+      },
+      {
+        "data": {
+          "slowSync": 1
+        }
+      },
+      {
+        "data": {
+          "slowSync": 1
+        }
+      },
+      {
+        "data": {
+          "slowSync": 1
+        }
+      }
+    ]
+  },
+  {
+    "method": "GraphQL threadpool",
+    "requests": 4,
+    "sleep_per_request": 0.5,
+    "seconds": 0.529,
+    "bodies": [
+      {
+        "data": {
+          "slowThreadpool": 1
+        }
+      },
+      {
+        "data": {
+          "slowThreadpool": 1
+        }
+      },
+      {
+        "data": {
+          "slowThreadpool": 1
+        }
+      },
+      {
+        "data": {
+          "slowThreadpool": 1
+        }
+      }
+    ]
+  }
+]
