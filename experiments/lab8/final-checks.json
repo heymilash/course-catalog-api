@@ -1,0 +1,10 @@
+{
+  "result": "PASS",
+  "checks": [
+    "Single/many loaders preserve key length/order and missing placeholders; caches are per context",
+    "12 concurrent HTTP reads: all per-request SQL counts 1/3, no mixed counters",
+    "Existing REST filters/pagination/stats and new student routes pass; errors and Allow preserved",
+    "SDL includes all three mutations, nullable course lookup, private relation IDs absent",
+    "Successful enrollment, next-request visibility, duplicate userError and missing-course like tested"
+  ]
+}

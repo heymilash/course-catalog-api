@@ -40,7 +40,7 @@ ok   email already taken  409  application/problem+json  email-taken
 ok   already enrolled     409  application/problem+json  already-enrolled
 ok   unknown course       404  application/problem+json  course-not-found
 ok   unknown student      404  application/problem+json  student-not-found
-ok   name too short       422  application/json          -
+ok   name too short       422  application/problem+json  validation-error
 5 of 5 as expected
 
 

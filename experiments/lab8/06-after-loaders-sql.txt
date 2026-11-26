@@ -1,15 +1,29 @@
-2026-11-26 08:34:26,118 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:34:26,119 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students ORDER BY students.id 
- LIMIT %(param_1)s::INTEGER
-2026-11-26 08:34:26,119 INFO sqlalchemy.engine.Engine [cached since 5.062s ago] {'param_1': 20}
-2026-11-26 08:34:26,122 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
-WHERE enrollments.student_id IN (%(student_id_1_1)s::BIGINT, %(student_id_1_2)s::BIGINT, %(student_id_1_3)s::BIGINT) ORDER BY enrollments.id
-2026-11-26 08:34:26,122 INFO sqlalchemy.engine.Engine [cached since 5.052s ago] {'student_id_1_1': 1, 'student_id_1_2': 2, 'student_id_1_3': 3}
-2026-11-26 08:34:26,124 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
-WHERE courses.id IN (%(id_1_1)s::VARCHAR, %(id_1_2)s::VARCHAR, %(id_1_3)s::VARCHAR) ORDER BY courses.id
-2026-11-26 08:34:26,125 INFO sqlalchemy.engine.Engine [cached since 5.021s ago] {'id_1_1': 'ai-integration', 'id_1_2': 'modern-frontend', 'id_1_3': 'backend-fastapi'}
-INFO:     127.0.0.1:61105 - "POST /graphql HTTP/1.1" 200 OK
-2026-11-26 08:34:26,128 INFO sqlalchemy.engine.Engine ROLLBACK
+2026-11-26 08:34:26,118 INFO sqlalchemy.engine.Engine BEGIN (implicit)
+
+2026-11-26 08:34:26,119 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+
+FROM students ORDER BY students.id
+
+ LIMIT %(param_1)s::INTEGER
+
+2026-11-26 08:34:26,119 INFO sqlalchemy.engine.Engine [cached since 5.062s ago] {'param_1': 20}
+
+2026-11-26 08:34:26,122 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+
+FROM enrollments
+
+WHERE enrollments.student_id IN (%(student_id_1_1)s::BIGINT, %(student_id_1_2)s::BIGINT, %(student_id_1_3)s::BIGINT) ORDER BY enrollments.id
+
+2026-11-26 08:34:26,122 INFO sqlalchemy.engine.Engine [cached since 5.052s ago] {'student_id_1_1': 1, 'student_id_1_2': 2, 'student_id_1_3': 3}
+
+2026-11-26 08:34:26,124 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+
+FROM courses
+
+WHERE courses.id IN (%(id_1_1)s::VARCHAR, %(id_1_2)s::VARCHAR, %(id_1_3)s::VARCHAR) ORDER BY courses.id
+
+2026-11-26 08:34:26,125 INFO sqlalchemy.engine.Engine [cached since 5.021s ago] {'id_1_1': 'ai-integration', 'id_1_2': 'modern-frontend', 'id_1_3': 'backend-fastapi'}
+
+INFO:     127.0.0.1:61105 - "POST /graphql HTTP/1.1" 200 OK
+
+2026-11-26 08:34:26,128 INFO sqlalchemy.engine.Engine ROLLBACK

@@ -1,0 +1,71 @@
+type Course {
+  id: ID!
+  title: String!
+  description: String!
+  credits: Int!
+  isElective: Boolean!
+  likes: Int!
+  level: String!
+  enrollments: [Enrollment!]!
+}
+
+input CreateStudentInput {
+  name: String!
+  email: String!
+}
+
+type CreateStudentPayload {
+  student: Student
+  userErrors: [UserError!]!
+}
+
+"""Date with time (isoformat)"""
+scalar DateTime
+
+input EnrollInput {
+  courseId: ID!
+  studentId: ID!
+}
+
+type EnrollPayload {
+  enrollment: Enrollment
+  userErrors: [UserError!]!
+}
+
+type Enrollment {
+  id: ID!
+  enrolledAt: DateTime!
+  course: Course!
+  student: Student!
+}
+
+type LikePayload {
+  course: Course
+  userErrors: [UserError!]!
+}
+
+type Mutation {
+  createStudent(input: CreateStudentInput!): CreateStudentPayload!
+  enroll(input: EnrollInput!): EnrollPayload!
+  likeCourse(id: ID!): LikePayload!
+}
+
+type Query {
+  courses(isElective: Boolean = null, limit: Int! = 20): [Course!]!
+  course(id: ID!): Course
+  students(limit: Int! = 20): [Student!]!
+  student(id: ID!): Student
+  enrollments(limit: Int! = 20): [Enrollment!]!
+}
+
+type Student {
+  id: ID!
+  name: String!
+  email: String!
+  enrollments: [Enrollment!]!
+}
+
+type UserError {
+  code: String!
+  message: String!
+}

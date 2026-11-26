@@ -12,6 +12,7 @@ The `before-lab8` tag and `lab7-defense` branch preserve Lab 7;
 `before-lab7` preserves Lab 5 and `lab4-defense` preserves Lab 4.
 Previous instructions: [Lab 7 README](docs/LAB7_README.md).
 Russian walkthrough: [LAB8_DEFENSE.md](LAB8_DEFENSE.md).
+Requirement-by-requirement verification: [acceptance audit](docs/LAB8_ACCEPTANCE.md).
 
 ## How to run
 
@@ -128,6 +129,8 @@ and Alembic checks passed. All six scripts above and both frontend pages passed.
 Lab 6 and Lab 7 databases were preserved. Actual output:
 [clean-start.txt](experiments/lab8/09-clean-start.txt),
 [comparison JSON](experiments/lab8/09-clean-comparison.json).
+The final clean-start check includes all bonuses; the earlier core-only result is
+retained as [09-core-clean-start.txt](experiments/lab8/09-core-clean-start.txt).
 HTTP rendering and server logs were checked. Automated visual browser review
 was unavailable because the Windows browser tool could not determine the URL.
 

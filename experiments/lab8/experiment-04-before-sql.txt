@@ -244,287 +244,287 @@ INFO:     127.0.0.1:58399 - "GET / HTTP/1.1" 200 OK
 2026-11-26 08:33:32,643 INFO sqlalchemy.engine.Engine show standard_conforming_strings
 2026-11-26 08:33:32,643 INFO sqlalchemy.engine.Engine [raw sql] {}
 2026-11-26 08:33:32,653 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:32,680 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses ORDER BY courses.likes DESC, courses.id 
+2026-11-26 08:33:32,680 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses ORDER BY courses.likes DESC, courses.id
  LIMIT %(param_1)s::INTEGER OFFSET %(param_2)s::INTEGER
 2026-11-26 08:33:32,680 INFO sqlalchemy.engine.Engine [generated in 0.00046s] {'param_1': 20, 'param_2': 0}
 INFO:     127.0.0.1:58400 - "GET /courses HTTP/1.1" 200 OK
 2026-11-26 08:33:32,697 INFO sqlalchemy.engine.Engine ROLLBACK
 2026-11-26 08:33:32,704 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:32,704 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses ORDER BY courses.likes DESC, courses.id 
+2026-11-26 08:33:32,704 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses ORDER BY courses.likes DESC, courses.id
  LIMIT %(param_1)s::INTEGER OFFSET %(param_2)s::INTEGER
 2026-11-26 08:33:32,704 INFO sqlalchemy.engine.Engine [cached since 0.02522s ago] {'param_1': 20, 'param_2': 0}
 INFO:     127.0.0.1:58400 - "GET /courses HTTP/1.1" 200 OK
 2026-11-26 08:33:32,710 INFO sqlalchemy.engine.Engine ROLLBACK
 2026-11-26 08:33:34,138 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:34,140 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students ORDER BY students.id 
+2026-11-26 08:33:34,140 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students ORDER BY students.id
  LIMIT %(param_1)s::INTEGER
 2026-11-26 08:33:34,140 INFO sqlalchemy.engine.Engine [generated in 0.00035s] {'param_1': 20}
-2026-11-26 08:33:34,147 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:34,147 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:34,148 INFO sqlalchemy.engine.Engine [generated in 0.00028s] {'param_1': 1}
-2026-11-26 08:33:34,177 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,177 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,177 INFO sqlalchemy.engine.Engine [generated in 0.00036s] {'pk_1': 'modern-frontend'}
-2026-11-26 08:33:34,180 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,180 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,180 INFO sqlalchemy.engine.Engine [cached since 0.003572s ago] {'pk_1': 'ai-integration'}
-2026-11-26 08:33:34,182 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:34,182 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:34,182 INFO sqlalchemy.engine.Engine [cached since 0.03474s ago] {'param_1': 2}
-2026-11-26 08:33:34,183 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,183 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,184 INFO sqlalchemy.engine.Engine [cached since 0.006915s ago] {'pk_1': 'backend-fastapi'}
-2026-11-26 08:33:34,185 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:34,185 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:34,185 INFO sqlalchemy.engine.Engine [cached since 0.03796s ago] {'param_1': 3}
 INFO:     127.0.0.1:58402 - "POST /graphql HTTP/1.1" 200 OK
 2026-11-26 08:33:34,188 INFO sqlalchemy.engine.Engine ROLLBACK
 2026-11-26 08:33:34,194 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:34,195 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments ORDER BY enrollments.id 
+2026-11-26 08:33:34,195 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments ORDER BY enrollments.id
  LIMIT %(param_1)s::INTEGER
 2026-11-26 08:33:34,195 INFO sqlalchemy.engine.Engine [generated in 0.00031s] {'param_1': 20}
-2026-11-26 08:33:34,197 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,197 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,198 INFO sqlalchemy.engine.Engine [cached since 0.02092s ago] {'pk_1': 'modern-frontend'}
-2026-11-26 08:33:34,200 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:34,200 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:34,200 INFO sqlalchemy.engine.Engine [generated in 0.00026s] {'pk_1': 1}
-2026-11-26 08:33:34,201 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,201 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,201 INFO sqlalchemy.engine.Engine [cached since 0.02462s ago] {'pk_1': 'ai-integration'}
-2026-11-26 08:33:34,203 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:34,203 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:34,203 INFO sqlalchemy.engine.Engine [cached since 0.003327s ago] {'pk_1': 2}
-2026-11-26 08:33:34,204 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:34,204 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:34,204 INFO sqlalchemy.engine.Engine [cached since 0.02753s ago] {'pk_1': 'backend-fastapi'}
-2026-11-26 08:33:34,206 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:34,206 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:34,206 INFO sqlalchemy.engine.Engine [cached since 0.006434s ago] {'pk_1': 3}
 INFO:     127.0.0.1:58402 - "POST /graphql HTTP/1.1" 200 OK
 2026-11-26 08:33:34,208 INFO sqlalchemy.engine.Engine ROLLBACK
 2026-11-26 08:33:35,886 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:35,887 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students ORDER BY students.id 
+2026-11-26 08:33:35,887 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students ORDER BY students.id
  LIMIT %(param_1)s::INTEGER
 2026-11-26 08:33:35,887 INFO sqlalchemy.engine.Engine [cached since 1.748s ago] {'param_1': 20}
-2026-11-26 08:33:35,890 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,890 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,890 INFO sqlalchemy.engine.Engine [cached since 1.742s ago] {'param_1': 1}
-2026-11-26 08:33:35,892 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,892 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,893 INFO sqlalchemy.engine.Engine [cached since 1.716s ago] {'pk_1': 'modern-frontend'}
-2026-11-26 08:33:35,895 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,895 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,896 INFO sqlalchemy.engine.Engine [cached since 1.719s ago] {'pk_1': 'ai-integration'}
-2026-11-26 08:33:35,899 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,899 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,899 INFO sqlalchemy.engine.Engine [cached since 1.752s ago] {'param_1': 2}
-2026-11-26 08:33:35,901 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,901 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,902 INFO sqlalchemy.engine.Engine [cached since 1.725s ago] {'pk_1': 'backend-fastapi'}
-2026-11-26 08:33:35,904 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,904 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,904 INFO sqlalchemy.engine.Engine [cached since 1.757s ago] {'param_1': 3}
-2026-11-26 08:33:35,906 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,906 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,907 INFO sqlalchemy.engine.Engine [cached since 1.759s ago] {'param_1': 4}
-2026-11-26 08:33:35,908 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,908 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,909 INFO sqlalchemy.engine.Engine [cached since 1.732s ago] {'pk_1': 'web-security'}
-2026-11-26 08:33:35,910 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,910 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,911 INFO sqlalchemy.engine.Engine [cached since 1.763s ago] {'param_1': 5}
-2026-11-26 08:33:35,913 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,913 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,913 INFO sqlalchemy.engine.Engine [cached since 1.766s ago] {'param_1': 6}
-2026-11-26 08:33:35,916 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,916 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,916 INFO sqlalchemy.engine.Engine [cached since 1.769s ago] {'param_1': 7}
-2026-11-26 08:33:35,918 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,918 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,918 INFO sqlalchemy.engine.Engine [cached since 1.771s ago] {'param_1': 8}
-2026-11-26 08:33:35,920 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,920 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,920 INFO sqlalchemy.engine.Engine [cached since 1.743s ago] {'pk_1': 'databases-postgresql'}
-2026-11-26 08:33:35,922 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,922 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,922 INFO sqlalchemy.engine.Engine [cached since 1.775s ago] {'param_1': 9}
-2026-11-26 08:33:35,924 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,924 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,924 INFO sqlalchemy.engine.Engine [cached since 1.747s ago] {'pk_1': 'api-design'}
-2026-11-26 08:33:35,926 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,926 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,926 INFO sqlalchemy.engine.Engine [cached since 1.779s ago] {'param_1': 10}
-2026-11-26 08:33:35,929 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,929 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,929 INFO sqlalchemy.engine.Engine [cached since 1.782s ago] {'param_1': 11}
-2026-11-26 08:33:35,931 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,931 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,932 INFO sqlalchemy.engine.Engine [cached since 1.784s ago] {'param_1': 12}
-2026-11-26 08:33:35,934 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,934 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,934 INFO sqlalchemy.engine.Engine [cached since 1.787s ago] {'param_1': 13}
-2026-11-26 08:33:35,936 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,936 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,937 INFO sqlalchemy.engine.Engine [cached since 1.789s ago] {'param_1': 14}
-2026-11-26 08:33:35,939 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,939 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,939 INFO sqlalchemy.engine.Engine [cached since 1.792s ago] {'param_1': 15}
-2026-11-26 08:33:35,941 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,941 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,942 INFO sqlalchemy.engine.Engine [cached since 1.794s ago] {'param_1': 16}
-2026-11-26 08:33:35,944 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,944 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,944 INFO sqlalchemy.engine.Engine [cached since 1.797s ago] {'param_1': 17}
-2026-11-26 08:33:35,946 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,946 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,946 INFO sqlalchemy.engine.Engine [cached since 1.799s ago] {'param_1': 18}
-2026-11-26 08:33:35,948 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,948 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,948 INFO sqlalchemy.engine.Engine [cached since 1.801s ago] {'param_1': 19}
-2026-11-26 08:33:35,950 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments 
+2026-11-26 08:33:35,950 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments
 WHERE %(param_1)s::BIGINT = enrollments.student_id
 2026-11-26 08:33:35,951 INFO sqlalchemy.engine.Engine [cached since 1.803s ago] {'param_1': 20}
 INFO:     127.0.0.1:58405 - "POST /graphql HTTP/1.1" 200 OK
 2026-11-26 08:33:35,954 INFO sqlalchemy.engine.Engine ROLLBACK
 2026-11-26 08:33:35,964 INFO sqlalchemy.engine.Engine BEGIN (implicit)
-2026-11-26 08:33:35,965 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at 
-FROM enrollments ORDER BY enrollments.id 
+2026-11-26 08:33:35,965 INFO sqlalchemy.engine.Engine SELECT enrollments.id, enrollments.course_id, enrollments.student_id, enrollments.enrolled_at
+FROM enrollments ORDER BY enrollments.id
  LIMIT %(param_1)s::INTEGER
 2026-11-26 08:33:35,965 INFO sqlalchemy.engine.Engine [cached since 1.77s ago] {'param_1': 20}
-2026-11-26 08:33:35,967 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,967 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,967 INFO sqlalchemy.engine.Engine [cached since 1.79s ago] {'pk_1': 'modern-frontend'}
-2026-11-26 08:33:35,969 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,969 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,969 INFO sqlalchemy.engine.Engine [cached since 1.769s ago] {'pk_1': 1}
-2026-11-26 08:33:35,971 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,971 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,971 INFO sqlalchemy.engine.Engine [cached since 1.794s ago] {'pk_1': 'ai-integration'}
-2026-11-26 08:33:35,973 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,973 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,973 INFO sqlalchemy.engine.Engine [cached since 1.774s ago] {'pk_1': 2}
-2026-11-26 08:33:35,976 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,976 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,976 INFO sqlalchemy.engine.Engine [cached since 1.799s ago] {'pk_1': 'backend-fastapi'}
-2026-11-26 08:33:35,978 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,978 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,978 INFO sqlalchemy.engine.Engine [cached since 1.778s ago] {'pk_1': 3}
-2026-11-26 08:33:35,980 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,980 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,980 INFO sqlalchemy.engine.Engine [cached since 1.803s ago] {'pk_1': 'web-security'}
-2026-11-26 08:33:35,982 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,982 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,982 INFO sqlalchemy.engine.Engine [cached since 1.782s ago] {'pk_1': 4}
-2026-11-26 08:33:35,984 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,984 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,984 INFO sqlalchemy.engine.Engine [cached since 1.784s ago] {'pk_1': 5}
-2026-11-26 08:33:35,985 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,985 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,986 INFO sqlalchemy.engine.Engine [cached since 1.786s ago] {'pk_1': 6}
-2026-11-26 08:33:35,988 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,988 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,988 INFO sqlalchemy.engine.Engine [cached since 1.788s ago] {'pk_1': 7}
-2026-11-26 08:33:35,989 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,989 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,990 INFO sqlalchemy.engine.Engine [cached since 1.813s ago] {'pk_1': 'databases-postgresql'}
-2026-11-26 08:33:35,992 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,992 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,992 INFO sqlalchemy.engine.Engine [cached since 1.792s ago] {'pk_1': 8}
-2026-11-26 08:33:35,993 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level 
-FROM courses 
+2026-11-26 08:33:35,993 INFO sqlalchemy.engine.Engine SELECT courses.id, courses.title, courses.description, courses.credits, courses.is_elective, courses.likes, courses.level
+FROM courses
 WHERE courses.id = %(pk_1)s::VARCHAR
 2026-11-26 08:33:35,994 INFO sqlalchemy.engine.Engine [cached since 1.817s ago] {'pk_1': 'api-design'}
-2026-11-26 08:33:35,996 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,996 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,996 INFO sqlalchemy.engine.Engine [cached since 1.796s ago] {'pk_1': 9}
-2026-11-26 08:33:35,997 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,997 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,998 INFO sqlalchemy.engine.Engine [cached since 1.798s ago] {'pk_1': 10}
-2026-11-26 08:33:35,999 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:35,999 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:35,999 INFO sqlalchemy.engine.Engine [cached since 1.8s ago] {'pk_1': 11}
-2026-11-26 08:33:36,001 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,001 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,001 INFO sqlalchemy.engine.Engine [cached since 1.802s ago] {'pk_1': 12}
-2026-11-26 08:33:36,003 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,003 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,003 INFO sqlalchemy.engine.Engine [cached since 1.804s ago] {'pk_1': 13}
-2026-11-26 08:33:36,005 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,005 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,005 INFO sqlalchemy.engine.Engine [cached since 1.806s ago] {'pk_1': 14}
-2026-11-26 08:33:36,007 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,007 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,008 INFO sqlalchemy.engine.Engine [cached since 1.808s ago] {'pk_1': 15}
-2026-11-26 08:33:36,009 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,009 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,010 INFO sqlalchemy.engine.Engine [cached since 1.81s ago] {'pk_1': 16}
-2026-11-26 08:33:36,011 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email 
-FROM students 
+2026-11-26 08:33:36,011 INFO sqlalchemy.engine.Engine SELECT students.id, students.name, students.email
+FROM students
 WHERE students.id = %(pk_1)s::BIGINT
 2026-11-26 08:33:36,012 INFO sqlalchemy.engine.Engine [cached since 1.812s ago] {'pk_1': 17}
 INFO:     127.0.0.1:58405 - "POST /graphql HTTP/1.1" 200 OK
