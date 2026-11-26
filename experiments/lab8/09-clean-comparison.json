@@ -1,0 +1,40 @@
+{
+  "student": 2,
+  "measurements": [
+    {
+      "api": "REST",
+      "requests": 5,
+      "rounds": 2,
+      "bytes": 1145,
+      "sql_queries": 5
+    },
+    {
+      "api": "GraphQL",
+      "requests": 1,
+      "rounds": 1,
+      "bytes": 339,
+      "sql_queries": 3
+    }
+  ],
+  "same_screen": true,
+  "screen": {
+    "name": "Daniyar Bekov",
+    "courses": [
+      {
+        "title": "Modern Frontend: React & Next.js",
+        "credits": 5,
+        "level": "intermediate"
+      },
+      {
+        "title": "Backend Foundations: FastAPI",
+        "credits": 5,
+        "level": "intermediate"
+      },
+      {
+        "title": "AI/LLM Integration",
+        "credits": 5,
+        "level": "beginner"
+      }
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+[
+  {
+    "query": "{ course(id: \"api-design\") { titel } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Cannot query field 'titel' on type 'Course'. Did you mean 'title', 'level', or 'likes'?",
+          "locations": [
+            {
+              "line": 1,
+              "column": 30
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "{ courses(is_elective: true) { id } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Unknown argument 'is_elective' on field 'Query.courses'. Did you mean 'isElective'?",
+          "locations": [
+            {
+              "line": 1,
+              "column": 11
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "{ courses(isElective: true) { id } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "courses": [
+          {
+            "id": "ai-integration"
+          },
+          {
+            "id": "api-design"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "rest_status": 404,
+    "body": {
+      "type": "https://example.com/problems/course-not-found",
+      "title": "Course not found",
+      "status": 404,
+      "detail": "Course not found",
+      "instance": "/courses/no-such"
+    }
+  }
+]

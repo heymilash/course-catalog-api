@@ -1,0 +1,17 @@
+[
+  {
+    "failure": "typo",
+    "http_status": 500,
+    "terminal": "⨯ Error [GraphQLRequestError]: Cannot query field 'titel' on type 'Course'. Did you mean 'title', 'level', or 'likes'?\n    at gql (lib\\graphql.ts:30:34)\n    at async MyCoursesPage (app\\my-courses\\page.tsx:24:23)\n  28 |   if (!response.ok) throw new Error(`API error: ${response.status}`);\n  29 |   const body: { data: T | null; errors?: GraphQLError[] } = await response.json();\n> 30 |   if (body.errors?.length) throw new GraphQLRequestError(body.errors);\n     |                                  ^\n  31 |   return body.data as T;\n  32 | }\n  33 | {\n  errors: [\n    {\n      message: \"Cannot query field 'titel' on type 'Course'. Did you mean 'title', 'level', or 'likes'?\",\n      locations: [Array]\n    }\n  ],\n  digest: '2631806458'\n}\n GET /my-courses?experiment=typo 500 in 310ms (next.js: 42ms, application-code: 268ms)\n"
+  },
+  {
+    "failure": "no-errors-check",
+    "http_status": 500,
+    "terminal": "⨯ TypeError: Cannot destructure property 'student' of '(intermediate value)' as it is null.\n    at MyCoursesPage (app\\my-courses\\page.tsx:24:11)\n  22 |\n  23 | export default async function MyCoursesPage() {\n> 24 |   const { student } = await gql<MyCourses>(MY_COURSES, { id: \"2\" });\n     |           ^\n  25 |   if (student === null) throw new Error(\"Student not found\");\n  26 |\n  27 |   return ( {\n  digest: '1986974583'\n}\n GET /my-courses?experiment=no-errors-check 500 in 171ms (next.js: 29ms, application-code: 142ms)\n"
+  },
+  {
+    "failure": "api-unavailable",
+    "http_status": 500,
+    "terminal": "⨯ TypeError: fetch failed\n    at async gql (lib\\graphql.ts:22:20)\n    at async MyCoursesPage (app\\my-courses\\page.tsx:24:23)\n  20 |   variables?: Record<string, unknown>,\n  21 | ): Promise<T> {\n> 22 |   const response = await fetch(`${API_URL}/graphql`, {\n     |                    ^\n  23 |     method: \"POST\",\n  24 |     headers: { \"Content-Type\": \"application/json\" },\n  25 |     body: JSON.stringify({ query, variables }), {\n  digest: '2283857116',\n  [cause]: Error: connect ECONNREFUSED 127.0.0.1:8008\n      at <unknown> (Error: connect ECONNREFUSED 127.0.0.1:8008) {\n    errno: -4078,\n    code: 'ECONNREFUSED',\n    syscall: 'connect',\n    address: '127.0.0.1',\n    port: 8008\n  }\n}\n GET /my-courses?experiment=api-unavailable 500 in 161ms (next.js: 26ms, application-code: 134ms)\n"
+  }
+]

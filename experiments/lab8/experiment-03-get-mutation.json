@@ -1,0 +1,40 @@
+{
+  "before": {
+    "query": "{ course(id: \"api-design\") { title likes } }",
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "course": {
+          "title": "API Design: REST vs GraphQL",
+          "likes": 11
+        }
+      }
+    }
+  },
+  "mutation": {
+    "query": "mutation { likeCourse(id: \"api-design\") { course { likes } } }",
+    "method": "GET",
+    "status": 400,
+    "content_type": "text/plain; charset=utf-8",
+    "sql": null,
+    "body": "mutations are not allowed when using GET"
+  },
+  "after": {
+    "query": "{ course(id: \"api-design\") { title likes } }",
+    "method": "GET",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "course": {
+          "title": "API Design: REST vs GraphQL",
+          "likes": 11
+        }
+      }
+    }
+  }
+}

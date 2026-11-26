@@ -1,0 +1,67 @@
+{
+  "schema": {
+    "query": "{ __schema { queryType { name } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "GraphQL introspection has been disabled, but the requested query contained the field '__schema'.",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ]
+        },
+        {
+          "message": "GraphQL introspection has been disabled, but the requested query contained the field 'queryType'.",
+          "locations": [
+            {
+              "line": 1,
+              "column": 14
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ordinary": {
+    "query": "{ course(id:\"api-design\") { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "1",
+    "body": {
+      "data": {
+        "course": {
+          "title": "API Design: REST vs GraphQL"
+        }
+      }
+    }
+  },
+  "typo": {
+    "query": "{ cours { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Cannot query field 'cours' on type 'Query'. Did you mean 'course' or 'courses'?",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

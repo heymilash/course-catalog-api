@@ -1,0 +1,20 @@
+[
+  {
+    "route": "/my-courses-rest",
+    "status": 200,
+    "api_requests": [
+      "INFO:     127.0.0.1:50784 - \"GET /students/2 HTTP/1.1\" 200 OK",
+      "INFO:     127.0.0.1:50785 - \"GET /students/2/enrollments HTTP/1.1\" 200 OK",
+      "INFO:     127.0.0.1:50784 - \"GET /courses/modern-frontend HTTP/1.1\" 200 OK",
+      "INFO:     127.0.0.1:50786 - \"GET /courses/backend-fastapi HTTP/1.1\" 200 OK",
+      "INFO:     127.0.0.1:50787 - \"GET /courses/ai-integration HTTP/1.1\" 200 OK"
+    ]
+  },
+  {
+    "route": "/my-courses",
+    "status": 200,
+    "api_requests": [
+      "INFO:     127.0.0.1:50784 - \"POST /graphql HTTP/1.1\" 200 OK"
+    ]
+  }
+]

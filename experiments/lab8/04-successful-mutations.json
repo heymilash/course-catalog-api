@@ -1,0 +1,41 @@
+[
+  {
+    "query": "mutation { enroll(input: {courseId:\"web-security\",studentId:\"3\"}) { enrollment { id enrolledAt course { title } } userErrors { code message } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "enroll": {
+          "enrollment": {
+            "id": "13",
+            "enrolledAt": "2026-11-26T08:33:20.429141+05:00",
+            "course": {
+              "title": "Web Security Essentials"
+            }
+          },
+          "userErrors": []
+        }
+      }
+    }
+  },
+  {
+    "query": "mutation { likeCourse(id:\"api-design\") { course { id likes } userErrors { code } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "likeCourse": {
+          "course": {
+            "id": "api-design",
+            "likes": 12
+          },
+          "userErrors": []
+        }
+      }
+    }
+  }
+]

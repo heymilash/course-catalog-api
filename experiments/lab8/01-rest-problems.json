@@ -1,0 +1,42 @@
+[
+  {
+    "method": "GET",
+    "path": "/courses/no-such",
+    "status": 404,
+    "content_type": "application/problem+json",
+    "allow": null,
+    "body": {
+      "type": "https://example.com/problems/course-not-found",
+      "title": "Course not found",
+      "status": 404,
+      "detail": "Course not found",
+      "instance": "/courses/no-such"
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/nope",
+    "status": 404,
+    "content_type": "application/problem+json",
+    "allow": null,
+    "body": {
+      "type": "about:blank",
+      "title": "Not Found",
+      "status": 404,
+      "instance": "/nope"
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/courses",
+    "status": 405,
+    "content_type": "application/problem+json",
+    "allow": "GET",
+    "body": {
+      "type": "about:blank",
+      "title": "Method Not Allowed",
+      "status": 405,
+      "instance": "/courses"
+    }
+  }
+]

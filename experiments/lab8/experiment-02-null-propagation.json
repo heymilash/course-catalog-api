@@ -1,0 +1,80 @@
+{
+  "before": {
+    "query": "{ a: course(id: \"api-design\") { title } b: course(id: \"nope\") { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "a": {
+          "title": "API Design: REST vs GraphQL"
+        },
+        "b": null
+      }
+    }
+  },
+  "non_null_single": {
+    "query": "{ course(id: \"nope\") { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Cannot return null for non-nullable field Query.course.",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ],
+          "path": [
+            "course"
+          ]
+        }
+      ]
+    }
+  },
+  "non_null_aliases": {
+    "query": "{ a: course(id: \"api-design\") { title } b: course(id: \"nope\") { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Cannot return null for non-nullable field Query.course.",
+          "locations": [
+            {
+              "line": 1,
+              "column": 41
+            }
+          ],
+          "path": [
+            "b"
+          ]
+        }
+      ]
+    }
+  },
+  "restored": {
+    "query": "{ a: course(id: \"api-design\") { title } b: course(id: \"nope\") { title } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": null,
+    "body": {
+      "data": {
+        "a": {
+          "title": "API Design: REST vs GraphQL"
+        },
+        "b": null
+      }
+    }
+  }
+}

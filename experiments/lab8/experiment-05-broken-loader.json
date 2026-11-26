@@ -1,0 +1,149 @@
+{
+  "before": {
+    "query": "{ enrollments { id course { title } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "2",
+    "body": {
+      "data": {
+        "enrollments": [
+          {
+            "id": "1",
+            "course": {
+              "title": "Modern Frontend: React & Next.js"
+            }
+          },
+          {
+            "id": "2",
+            "course": {
+              "title": "AI/LLM Integration"
+            }
+          },
+          {
+            "id": "3",
+            "course": {
+              "title": "Modern Frontend: React & Next.js"
+            }
+          },
+          {
+            "id": "4",
+            "course": {
+              "title": "Backend Foundations: FastAPI"
+            }
+          },
+          {
+            "id": "5",
+            "course": {
+              "title": "AI/LLM Integration"
+            }
+          },
+          {
+            "id": "6",
+            "course": {
+              "title": "AI/LLM Integration"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "wrong_length": {
+    "query": "{ students { name enrollments { course { title } } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "2",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Received wrong number of results in dataloader, expected: 3, received: 6",
+          "locations": [
+            {
+              "line": 1,
+              "column": 19
+            }
+          ],
+          "path": [
+            "students",
+            0,
+            "enrollments"
+          ]
+        }
+      ]
+    }
+  },
+  "wrong_order": {
+    "query": "{ enrollments { id course { title } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "2",
+    "body": {
+      "data": {
+        "enrollments": [
+          {
+            "id": "1",
+            "course": {
+              "title": "Modern Frontend: React & Next.js"
+            }
+          },
+          {
+            "id": "2",
+            "course": {
+              "title": "Backend Foundations: FastAPI"
+            }
+          },
+          {
+            "id": "3",
+            "course": {
+              "title": "Modern Frontend: React & Next.js"
+            }
+          },
+          {
+            "id": "4",
+            "course": {
+              "title": "AI/LLM Integration"
+            }
+          },
+          {
+            "id": "5",
+            "course": {
+              "title": "Backend Foundations: FastAPI"
+            }
+          },
+          {
+            "id": "6",
+            "course": {
+              "title": "Backend Foundations: FastAPI"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "mismatches": [
+    {
+      "id": "2",
+      "correct": "AI/LLM Integration",
+      "wrong": "Backend Foundations: FastAPI"
+    },
+    {
+      "id": "4",
+      "correct": "Backend Foundations: FastAPI",
+      "wrong": "AI/LLM Integration"
+    },
+    {
+      "id": "5",
+      "correct": "AI/LLM Integration",
+      "wrong": "Backend Foundations: FastAPI"
+    },
+    {
+      "id": "6",
+      "correct": "AI/LLM Integration",
+      "wrong": "Backend Foundations: FastAPI"
+    }
+  ],
+  "restored": true
+}

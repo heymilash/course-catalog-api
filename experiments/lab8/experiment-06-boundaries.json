@@ -1,0 +1,240 @@
+[
+  {
+    "query": "{ student(id:2) { enrollments { course { enrollments { id } } } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "4",
+    "body": {
+      "data": {
+        "student": {
+          "enrollments": [
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "id": "1"
+                  },
+                  {
+                    "id": "3"
+                  }
+                ]
+              }
+            },
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "id": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "id": "2"
+                  },
+                  {
+                    "id": "5"
+                  },
+                  {
+                    "id": "6"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "query": "{ student(id:2) { enrollments { course { enrollments { student { name } } } } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "5",
+    "body": {
+      "data": {
+        "student": {
+          "enrollments": [
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "student": {
+                      "name": "Aigerim Sadykova"
+                    }
+                  },
+                  {
+                    "student": {
+                      "name": "Daniyar Bekov"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "student": {
+                      "name": "Daniyar Bekov"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "course": {
+                "enrollments": [
+                  {
+                    "student": {
+                      "name": "Aigerim Sadykova"
+                    }
+                  },
+                  {
+                    "student": {
+                      "name": "Daniyar Bekov"
+                    }
+                  },
+                  {
+                    "student": {
+                      "name": "Asel Omarova"
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "query": "{ courses(limit:0) { id } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "limit must be between 1 and 100",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ],
+          "path": [
+            "courses"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "{ students(limit:101) { id } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "limit must be between 1 and 100",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ],
+          "path": [
+            "students"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "mutation { enroll(input:{courseId:\"web-security\",studentId:\"abc\"}) { userErrors { code } } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": null,
+      "errors": [
+        {
+          "message": "Invalid ID: 'abc'",
+          "locations": [
+            {
+              "line": 1,
+              "column": 12
+            }
+          ],
+          "path": [
+            "enroll"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "{ student(id:\"abc\") { name } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "0",
+    "body": {
+      "data": {
+        "student": null
+      },
+      "errors": [
+        {
+          "message": "Invalid ID: 'abc'",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ],
+          "path": [
+            "student"
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "query": "{ student(id:\"99999999999999999999\") { name } }",
+    "method": "POST",
+    "status": 200,
+    "content_type": "application/json",
+    "sql": "1",
+    "body": {
+      "data": {
+        "student": null
+      },
+      "errors": [
+        {
+          "message": "Unexpected error.",
+          "locations": [
+            {
+              "line": 1,
+              "column": 3
+            }
+          ],
+          "path": [
+            "student"
+          ]
+        }
+      ]
+    }
+  }
+]

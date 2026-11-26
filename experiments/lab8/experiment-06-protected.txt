@@ -1,0 +1,7 @@
+case               status  result
+depth 6 (cycle)    200     'Cycle' exceeds maximum operation depth of 5
+12 aliases         200     12 aliases found. Allowed: 10
+limit -1           200     limit must be between 1 and 100
+id "abc"           200     Invalid ID: 'abc'
+id of 20 digits    200     Unexpected error.
+introspection      200     data, no errors

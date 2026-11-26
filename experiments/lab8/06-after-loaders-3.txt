@@ -1,0 +1,2 @@
+students -> enrollments -> course    rows: 3   SQL queries: 3
+enrollments -> course, student       rows: 6   SQL queries: 3

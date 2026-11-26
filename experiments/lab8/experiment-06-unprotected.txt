@@ -1,0 +1,7 @@
+case               status  result
+depth 6 (cycle)    200     data, no errors
+12 aliases         200     data, no errors
+limit -1           200     (psycopg.errors.InvalidRowCountInLimitClause) LIMIT must not be negative
+id "abc"           200     invalid literal for int() with base 10: 'abc'
+id of 20 digits    200     (psycopg.errors.NumericValueOutOfRange) bigint out of range
+introspection      200     data, no errors
